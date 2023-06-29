@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+      <!-- card grid-->
+
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col">
+            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center"><Strong>User</Strong></div>
+                <div class="card-body">
+                    <p class="card-text text-center">{{curr_user.username}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center"><strong>Num. Employees</strong></div>
+                <div class="card-body">
+                  <p class="card-text text-center">{{num_records}}</p>
+                </div>
+              </div>
+        </div>
+        <div class="col">
+            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center"><strong> Num. Employees added in the Current Month </strong></div>
+                <div class="card-body">
+                  <p class="card-text text-center">{{num_records_this_month}}</p>
+                </div>
+              </div>
+        </div>
+        <div class="col">
+            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header text-center"><strong> Total salary expenditure each month </strong></div>
+                <div class="card-body">
+                  <p class="card-text text-center">${{sum.salary__sum}}</p>
+                </div>
+              </div>
+        </div>
+      </div>
+
+      <br>
+      <h4 class="text-center">Employees added this month</h4> <br>
+
+
+      {% if records_this_month %}
+    
+    <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">Email</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Date Created</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        
+      
+      <tbody>
+        {% for record in records_this_month %}
+        <tr>
+            <th scope="row"><a href="{% url 'record' record.id %}">{{record.id}}</a></th>
+            <td>{{record}}</td>
+            <td>{{record.job_title}}</td>
+            <td>{{record.email_address}}</td>
+            <td>${{record.salary}}</td>
+            <td>{{record.date_created}}</td>
+            <td>
+              <a href="{% url 'update_employee' record.id %}" class="btn btn-secondary">Update</a>
+              <a href="{% url 'delete_employee' record.id %}" class="btn btn-danger">Delete</a>
+            </td>
+          </tr>
+          
+           
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+
+{% endblock %}

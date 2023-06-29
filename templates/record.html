@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% if record %}
+
+    <div class="card">
+        <h5 class="card-header">{{record}}</h5>
+        <div class="card-body">
+        <p class="card-text"><strong>Job Title:</strong> {{record.job_title}}</p>
+        <p class="card-text"><strong>Email:</strong> {{record.email_address}}</p>
+        <p class="card-text"><strong>Address:</strong> {{record.address}}</p>
+        <p class="card-text"><strong>Details:</strong> {{record.details}}</p>
+        <p class="card-text"><strong>Salary:</strong> ${{record.salary}}</p>
+        <p class="card-text"><strong>Date created:</strong> {{record.date_created}}</p>
+        <a href="{% url 'update_employee' record.id %}" class="btn btn-secondary">Update</a>
+        <a href="{% url 'delete_employee' record.id %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+    {% if search_input %}
+        {% if employees %}
+
+            <table class="table table-striped">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Job Title</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Date Created</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <th scope="row"><a href="{% url 'record' employee.id %}">{{employee.id}}</a></th>
+                    <td>{{employee.first_name}} {{employee.last_name}}</td>
+                    <td>{{employee.job_title}}</td>
+                    <td>{{employee.email_address}}</td>
+                    <td>${{employee.salary}}</td>
+                    <td>{{employee.date_created}}</td>
+                    <td>
+                    <a href="{% url 'update_employee' employee.id %}" class="btn btn-secondary">Update</a>
+                    <a href="{% url 'delete_employee' employee.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h2>Not found</h2>
+
+        {% endif %}
+
+    {% else %}
+
+    <h2>No query given</h2>
+
+    {% endif %}
+
+
+
+
+{% endblock %}
