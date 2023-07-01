@@ -57,6 +57,8 @@ def record_view(request, pk):
         return redirect('index')
     
 
+
+@login_required(login_url="index")
 def add_employee(request):
     if request.method == "POST":  
           
@@ -112,6 +114,7 @@ def register(request):
         return render(request ,'register.html')
     
 
+@login_required(login_url="index")
 def delete_employee(request, pk):
     if request.user.is_authenticated:
      
